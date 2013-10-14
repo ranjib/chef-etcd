@@ -19,13 +19,16 @@ Or install it yourself as:
 ## Usage
 
 1. ```require``` the chef-etcd library in your client config (knife.rb/solo.rb/client.rb) and set ```Chef::Config[:etcd]``` to an existing [etcd](https://github.com/coreos/etcd) node.
+
 ```ruby
 require 'chef/etcd'
 node_name 'something'
 etcd_host = '192.168.122.1'
 Chef::Config[:etcd]= {host:etcd_host}
 ```
+
 2. you can use the resource/provider to get/set etcd keys
+
 ```ruby
 etcd "/test/recipe/set" do
   action :set
@@ -66,12 +69,12 @@ end
 
 ```
 3. To publish node data using the report handler, or to monitor realtime chef resource convergence(event handler), add following configurations to your client.rb/solo.rb
+
 ```ruby
 event_handlers [Chef::EventDispatch::Etcd.new(host: etcd_host)]
 report_handlers << Chef::Handler::EtcdReport.new(host: etcd_host)
 
 ```
-
 
 ## Contributing
 
