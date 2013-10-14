@@ -30,41 +30,35 @@ Chef::Config[:etcd]= {host:etcd_host}
 2. you can use the resource/provider to get/set etcd keys
 
 ```ruby
+# setting keys
+# idempotent, does not set the key if the value is same
 etcd "/test/recipe/set" do
   action :set
   value Time.now.to_s
 end
 
+# set another key for delete operation
 etcd "/test/recipe/delete" do
   action :set
   value Time.now.to_s
 end
-
+# delete the key. doesn't do anything if the key if absent
 etcd "/test/recipe/delete" do
   action :delete
   value Time.now.to_s
 end
-
+# set one more key for show casing test_and_set
 etcd "/test/recipe/test_and_set" do
   action :set
   value "0"
 end
 
+# this gets updated only when the test_and_set action fails. if it passes it sets updated_by_last_action to false.
+# I intend to use this for notifying resources. Its prototype as of now
 etcd "/test/recipe/test_and_set" do
   action :test_and_set
   value Time.now.to_s
   prev_value "0"
-end
-
-etcd "/test/recipe/watch" do
-  action :set
-  value Time.now.to_s
-end
-
-Chef::Log.warn("This will halt the recipe, and you have to update the recipe from outside or do some thread foo here")
-etcd "/test/recipe/watch" do
-  action :watch
-  value Time.now.to_s
 end
 
 ```
