@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ranjib Dey"]
   spec.email         = ["dey.ranjib@gmail.com"]
   spec.description   = %q{Etcd-Chef bindings}
-  spec.summary       = %q{Provides chef resource, provider, handler for etcd}
+  spec.summary       = %q{Provides chef resource, provider, handlers for etcd}
   spec.homepage      = "https://github.com/ranjib/chef-etcd"
   spec.license       = "MIT"
 
