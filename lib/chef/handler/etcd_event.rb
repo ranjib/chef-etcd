@@ -8,12 +8,12 @@ class Chef
       attr_reader :etcd
 
       def initialize(options={})
-        config = options[:client] || {}
-        @etcd = Etcd.client(config)
+        etcd_host = options[:host] || '127.0.0.1'
+        etcd_port = options[:port] || 4001
+        @etcd = ::Etcd.client(host: etcd_host, port: etcd_port)
         @global_ttl = options[:global_ttl] || 600
         @ttls = options[:ttls] || {}
       end
-
 
       def get_ttl(m)
         if @ttls.has_key?(m)
@@ -24,7 +24,7 @@ class Chef
       end
 
       def name_space 
-        '/nodes/chef/' + Chef::Config[:node_name]
+        '/nodes/' + Chef::Config[:node_name] + '/chef'
       end
 
       def etcd_set(m, k, v=nil) # m = method
