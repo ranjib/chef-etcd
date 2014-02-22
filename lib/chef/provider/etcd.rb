@@ -29,7 +29,7 @@ class Chef
 
       def etcd
         @etcd ||= ::Etcd.client(config)
-      end  
+      end
 
 
       def key_exist?
@@ -61,7 +61,7 @@ class Chef
         end
       end
       def action_get
-        converge_by "will set value of key #{new_resource.key}" do
+        converge_by "will get value of key #{new_resource.key}" do
           if key_exist?
             current_value
           else
