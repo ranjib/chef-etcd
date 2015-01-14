@@ -31,7 +31,6 @@ class Chef
         @etcd ||= ::Etcd.client(config)
       end
 
-
       def key_exist?
         exist = true
         begin
@@ -55,7 +54,7 @@ class Chef
           Chef::Log.debug(" etcd #{new_resource.key} is in sync")
         else
           converge_by "will set value of key #{new_resource.key}" do
-            etcd.set(new_resource.key, new_resource.value)
+            etcd.set(new_resource.key, value: new_resource.value)
             new_resource.updated_by_last_action(true)
           end
         end

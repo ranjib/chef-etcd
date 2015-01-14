@@ -15,7 +15,7 @@ class Chef
       def report
         if success?
           data = {total: all_resources.size, updated: updated_resources.size, time: elapsed_time}
-          @etcd.set('/nodes/'+Chef::Config[:node_name]+'/chef/report',JSON.dump(data))
+          @etcd.set('/nodes/'+Chef::Config[:node_name]+'/chef/report', value: JSON.dump(data))
         end
       end
     end

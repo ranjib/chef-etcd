@@ -31,7 +31,7 @@ class Chef
         key= name_space + k 
         value = v || m
         ttl = get_ttl(m)
-        etcd.set(key, value, ttl)
+        etcd.set(key, value: value, ttl: ttl)
       end
 
       def set_sub_status(m)
